@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleRDBMS</title>
+    <link rel="icon" href="assets/icons8-database-96.png" type="image/png">
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                </svg>
+                SimpleDB - Custom RDBMS
+            </h1>
+            <p>In-memory relational database with SQL interface</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('repl')">SQL REPL</button>
+            <button class="tab" onclick="switchTab('demo')">Demo App</button>
+            <button class="tab" onclick="switchTab('docs')">Documentation</button>
+        </div>
+
+        <div class="content">
+            <!-- REPL Tab -->
+            <div id="repl-panel" class="tab-panel active">
+                <div class="sql-input">
+                    <input type="text" id="sql-input" placeholder="SELECT * FROM users" />
+                    <button class="btn-primary" onclick="executeSQL()">Execute</button>
+                </div>
+                <div id="history"></div>
+            </div>
+
+            <!-- Demo App Tab -->
+            <div id="demo-panel" class="tab-panel">
+                <div class="docs-section">
+                    <h3>Task Manager Demo</h3>
+                    <p style="color: #6b7280; margin-bottom: 20px;">
+                        This app uses the SimpleDB backend to manage tasks with full CRUD operations.
+                    </p>
+                    
+                    <div class="sql-input">
+                        <input type="text" id="task-input" placeholder="Enter a new task..." />
+                        <button class="btn-success" onclick="addTask()">Add Task</button>
+                    </div>
+
+                    <div id="task-list"></div>
+                </div>
+            </div>
+
+            <!-- Documentation Tab -->
+            <div id="docs-panel" class="tab-panel">
+                <div class="docs-section">
+                    <h3>Features</h3>
+                    <ul>
+                        <li>✅ CREATE TABLE with column types (INTEGER, TEXT, REAL, BOOLEAN)</li>
+                        <li>✅ PRIMARY KEY and UNIQUE constraints</li>
+                        <li>✅ NOT NULL constraints</li>
+                        <li>✅ Automatic indexing on PRIMARY KEY and UNIQUE columns</li>
+                        <li>✅ INSERT, SELECT, UPDATE, DELETE operations</li>
+                        <li>✅ WHERE clause with comparison operators</li>
+                        <li>✅ Basic JOIN operations</li>
+                        <li>✅ DROP TABLE support</li>
+                    </ul>
+                </div>
+
+                <div class="docs-section">
+                    <h3>Example Commands</h3>
+                    <div class="code-block">
+                        <div class="code-line">CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT NOT NULL, price REAL)</div>
+                        <div class="code-line">INSERT INTO products (id, name, price) VALUES (1, 'Laptop', 999.99)</div>
+                        <div class="code-line">SELECT * FROM products</div>
+                        <div class="code-line">SELECT name, price FROM products WHERE price > 500</div>
+                        <div class="code-line">UPDATE products SET price = 899.99 WHERE id = 1</div>
+                        <div class="code-line">DELETE FROM products WHERE id = 1</div>
+                        <div class="code-line">SELECT * FROM users JOIN tasks ON users.id = tasks.user_id</div>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h3>Architecture</h3>
+                    <p style="color: #374151; line-height: 1.6;">
+                        SimpleDB is built from scratch in JavaScript with no external dependencies. It features
+                        a columnar storage model with automatic indexing, constraint validation, and a simple
+                        SQL parser. The implementation demonstrates core RDBMS concepts including B-tree-style
+                        indexing (using Map data structures), transaction-like operations, and relational algebra.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>   
+</body>
+</html>
